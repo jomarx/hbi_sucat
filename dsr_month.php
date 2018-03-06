@@ -74,6 +74,7 @@ try {
 	<?php
 	
 	echo "<br>";
+	echo "<b>Current Month: $dmonth / Current Year: $dyear </b><br><br>";
 
 	//Start connection
 	//SELECT id FROM things  WHERE MONTH(happened_at) = 1 AND YEAR(happened_at) = 2009
