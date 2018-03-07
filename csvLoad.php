@@ -32,6 +32,11 @@ echo "</span>";
 
 $rowcounter=1;
 
+$whCode = array("GAACWH","GABGWH","GACAWH","GACMWH","GACOWH","GACTWH","GAGMWH","GAGTWH","GALIWH","GALPWH","GAMCWH","GAMEWH","GAMGWH","GAMIWH","GAMMWH","GAMNWH","GAPRWH","GARBWH","GASCWH","GASIWH","GASMWH","GATAWH","GATBWH");
+
+echo "Array length : ".count($whCode)."<br>";
+$whCodeLength = count($whCode)."<br>";
+
 try {
 
 	//Start connection
@@ -62,32 +67,38 @@ try {
 //$query = "LOAD DATA INFILE '$fileName' INTO TABLE dummy_data (num,CustomerCode,PostingDate,DeliveryDate,DocumentDate,SKUCode,Quantity,WareHouseCode,Remarks), FIELDS TERMINATED BY ',', IGNORE 1 LINES LINES TERMINATED BY '\r\n'  ";
 //$query = "LOAD DATA INFILE '$fileName' INTO TABLE dsr_src FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES (num1, CustomerCode, @PostingDate, @DeliveryDate, @DocumentDate, SKUCode, Quantity, WareHouseCode, Remarks) set PostingDate = str_to_date(@PostingDate, '%m/%d/%Y'),  DeliveryDate = str_to_date(@DeliveryDate, '%d/%m/%Y'), DocumentDate = str_to_date(@DocumentDate, '%d/%m/%Y')";
 
-for ($type = 1; $type <= 4; $type++) {
-	
-	if ($type=='1') {
-		$catType="HL";
-	} else if ($type=='2') {
-		$catType="HMU";
-	} else if ($type=='3') {
-		$catType="PTX";
-	} else if ($type=='4') {
-		$catType="WB";
-	} else {
-	//
+
+for ($wLength = 0; $wLength < $whCodeLength; $wLength++) {
+	echo "Current whCode: ".$whCode[$wLength];
+    echo "<br><br>";
+
+	for ($type = 1; $type <= 4; $type++) {
+		
+		if ($type=='1') {
+			$catType="HL";
+		} else if ($type=='2') {
+			$catType="HMU";
+		} else if ($type=='3') {
+			$catType="PTX";
+		} else if ($type=='4') {
+			$catType="WB";
+		} else {
+		//
+		}
+
+		for ($x = 1; $x <= 30; $x++) {
+			
+			$fileName = "D:/xampp/htdocs/sucat/data/".$whCode[$type]."/".$catType."/".$x.".csv";
+			
+			$query = "LOAD DATA INFILE '$fileName' INTO TABLE dsr_src FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES (num1, CustomerCode, @PostingDate, @DeliveryDate, @DocumentDate, SKUCode, Quantity, WareHouseCode, Remarks, @sourceData) set PostingDate = str_to_date(@PostingDate, '%m/%d/%Y'),  DeliveryDate = str_to_date(@DeliveryDate, '%d/%m/%Y'), DocumentDate = str_to_date(@DocumentDate, '%d/%m/%Y'), sourceData = '$fileName'";
+			
+			$conn->query($query);
+			echo $fileName." done!<BR>";
+		} 
+
 	}
 
-	for ($x = 1; $x <= 30; $x++) {
-		
-		$fileName = "D:/xampp/htdocs/sucat/".$catType."/".$x.".csv";
-		
-		$query = "LOAD DATA INFILE '$fileName' INTO TABLE dsr_src FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES (num1, CustomerCode, @PostingDate, @DeliveryDate, @DocumentDate, SKUCode, Quantity, WareHouseCode, Remarks) set PostingDate = str_to_date(@PostingDate, '%m/%d/%Y'),  DeliveryDate = str_to_date(@DeliveryDate, '%d/%m/%Y'), DocumentDate = str_to_date(@DocumentDate, '%d/%m/%Y')";
-		
-		$conn->query($query);
-		echo $fileName." done!<BR>";
-	} 
-
 }
-
 
 
 echo "<BR><b>CSV uploader</b><BR><BR>";
