@@ -187,9 +187,12 @@ try {
 
 			
 		}
+		echo "<script>alert('Success!');</script>";
 	}
 
 echo "<BR><b>CSV uploader</b><BR><BR>";
+//sets option to NA to prevent running again on refresh
+$_SESSION["whcode"]="wala";
 
 //session_destroy();
 }
