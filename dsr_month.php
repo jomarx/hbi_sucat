@@ -79,7 +79,7 @@ try {
 	//Start connection
 	//SELECT id FROM things  WHERE MONTH(happened_at) = 1 AND YEAR(happened_at) = 2009
 	//$sql1 = "SELECT CustomerCode, PostingDate, SKUCode, SUM(Quantity), WareHouseCode FROM dsr_src WHERE MONTH(PostingDate) = $dmonth AND YEAR(PostingDate) = $dyear GROUP BY CustomerCode ";
-	$sql1 = "SELECT CustomerCode, PostingDate, DeliveryDate, SKUCode, SUM(Quantity), WareHouseCode FROM dsr_src WHERE MONTH(PostingDate) = $dmonth AND YEAR(PostingDate) = $dyear GROUP BY SKUCode, CustomerCode ";
+	$sql1 = "SELECT CustomerCode, PostingDate, DeliveryDate, SKUCode, SUM(Quantity), WareHouseCode FROM dsr_src WHERE MONTH(DeliveryDate) = $dmonth AND YEAR(DeliveryDate) = $dyear GROUP BY SKUCode, CustomerCode ";
 
 	$result1 = $conn->query($sql1);
 
