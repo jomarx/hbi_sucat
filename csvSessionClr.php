@@ -1,0 +1,9 @@
+<?php
+//error_reporting(0);
+include("config.php");
+session_start();
+$_SESSION["whcode"]="wala";
+?>
+<script>
+	window.location.replace("csvLoad.php");
+</script>
