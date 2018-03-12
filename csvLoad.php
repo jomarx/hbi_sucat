@@ -8,6 +8,11 @@ $sec = "1000";
 removed refresh code
 <meta http-equiv="refresh" content="<?php echo $sec?>;URL='<?php echo $page?>'">
 */
+//https://stackoverflow.com/questions/535020/tracking-the-script-execution-time-in-php
+
+//place this before any script you want to calculate time
+$time_start = microtime(true); 
+
 ?>
 <html>
     <head>
@@ -139,7 +144,7 @@ try {
 	}
 
 	if ($result->num_rows > 0) {
-		
+		//http://php.net/manual/en/mysqli-result.num-rows.php
 		$row_cnt = $result->num_rows;
 
 		echo "<b>Number of stores : </b>".$row_cnt."<br><br>";
@@ -188,7 +193,17 @@ try {
 			
 		}
 		//https://stackoverflow.com/questions/7437713/how-to-create-a-pop-up-window-using-php-via-echo
-		echo "<script>alert('Success!');</script>";
+		
+		$time_end = microtime(true);
+
+		//dividing with 60 will give the execution time in minutes other wise seconds
+		$execution_time = ($time_end - $time_start)/60;
+
+		//execution time of the script
+		echo '<b>Total Execution Time:</b> '.number_format((float) $execution_time, 3).' Mins';
+		// in you get wierd result, use number_format((float) $execution_time, 10) 
+		$execution_time1=number_format((float) $execution_time, 3);
+		echo "<script>alert('Success! Total Execution Time: $execution_time1 mins');</script>";
 	}
 
 echo "<BR><b>CSV uploader</b><BR><BR>";
