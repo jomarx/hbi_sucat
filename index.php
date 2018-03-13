@@ -21,6 +21,9 @@ if ($_SESSION["id"]!=""){
 <BR><a href="csvLoad.php">CSV Loader</a><BR><BR>
 <BR><a href="csvView.php">CSV ALL Viewer</a><BR><BR>
 <BR><a href="dsr_month.php">DSR Monthly Generator</a><BR><BR>
+<BR><a href="dsr_monthPerCat.php">DSR Monthly - Per Category Generator</a><BR><BR>
+<BR><a href="dsr_Week.php">DSR Weekly / Custom Generator</a><BR><BR>
+
 <br>
 <br>
 
