@@ -35,6 +35,7 @@ $time_start = microtime(true);
 <?php
 include("config.php");
 session_start();
+error_reporting(0);
 
 echo "<center>";
 echo "<span style='font-size: 25pt'>";

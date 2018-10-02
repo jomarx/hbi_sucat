@@ -10,10 +10,6 @@ include("config.php");
 session_start();
 error_reporting(0);
 
-if ($_SESSION["id"]!=""){
-	header('location:home.php');
-}
-
 ?>
 <body>
 <b><center><br><img src="hb.jpg"><br>
